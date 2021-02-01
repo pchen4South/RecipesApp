@@ -1,0 +1,93 @@
+I do full-stack development using C#, .net mvc and entityframework. Using Microsoft SQL server for the databases.
+- stored procs
+- queries
+
+- Frontend is the razor templating engine, various javascript frameworks (jquery, charting libraries - c3,d3, jq-validation) 
+- Design data models and API's.
+
+internal/external facing sites
+Internal web apps intended to support the business units (accounting, claims, underwriting etc.) 
+in their day to day work. I've automated several processes that were previously completely done manually in spreadsheets.
+Created an analogue to a 3rd party disaster recovery plan software in-house to save on licensing costs.
+
+External apps for insurance agents to access docs and forms from the business, make payments, request quotes and policy changes online.
+
+I've used React in the past on a project w Bonfyre
+Used Ember.JS - similar to angular but not specifically angular
+
+bfc - EMR
+Designed / built / create
+- zoe - fashion / subscription / ecommerce
+- some project management (self management on projects)
+
+Why join?
+I want to join a tech-first company working on interesting and impactful projects. 
+I'd love to collaborate with top level colleages - both fellow engineers and other teammates.
+I feel like it would help me grow professionally and I'd love to be a great contributor on an awesome team.
+
+Why now?
+I feel like I can contribute immediately given my experiences and am excited to join a team on a tech-focused company.
+
+What are you looking for in a new job?
+I have significant fullstack experience and first and foremost I'd love to find a position where I can continue to exercise and grow these skills.
+Another thing that's important to me is delivering a great end product to stakeholders/users, I enjoy collaborating with stakeholders / BA's / PM's / Devs to 
+ship a great product. I'm also definitely looking for a place where I can continue to grow. Professional development is really important to me as I'd like to
+advance to the senior engineering levels. I'd love a position where I can see my impact with my own eyes. I'm really excited with this opportunity at <company>
+because I feel the impact would be great and far-reaching.
+
+Whats ur current?
+I’m not really comfortable sharing that information. I would prefer to focus on the value I can add to this company and not what I’m paid at my current job.
+
+I’m just not comfortable discussing my current or expected salary. I prefer to focus on the value I can add in this position, and I look forward to hearing what you think is appropriate.
+
+I don’t have any particular numbers in mind. I’m more interested in learning whether this will be a good mutual fit. If it is, I’m open to exploring any offer so long as it’s competitive.
+
+Frontend engineer for AWS - Seattle
+AWS Commerce
+- fraud prevention
+- billing, insight
+- cloud optimization
+- product team on frontend size
+- phone interview (5-7 min)
+    - go thru Leadership Principles
+- frontend tech / frontend design
+- youtube for leadership principles / frontend
+
+Unity 2020 1.13f1
+
+- fullstack dev
+- Develop and maintain .NET MVC applications utilizing C#, SQL, 
+Javascript, HTML, CSS, bootstrap, jQuery
+
+- Build internal apps for business partners as well as externally facing apps intended for client usage
+- Collaborate with dev team, business analysts, QA, and other members of the IT team to deliver dynamic and impactful 
+production software
+- Work closely with the Infrastructure team to promote application builds to the test and production environments and ensure application uptime
+- Automated a process to identify overdue accounts, create, and send bills and letters to customers 
+    -  This process was formerly entirely done manually in spreadsheets by the Accounting department
+    -  Integrated a third-party tool as a web service to create PDFs from HTML. This service is reused by subsequent projects by the dev team
+- Built a new feature for the Claims department to identify and process a specific type of account
+    -  Creates and sends bills and reminders to insurance policy holders
+    -  Automated this previously manual process
+- Agile development with regular scrum meetings involving end users and business analysts
+- Collaborate with the development team and help junior devs to write more efficient and maintainable code. Accept and follow feedback and suggestions on improving code writing and thought processes
+
+flo
+catch up
+    - hows his mom, wheres he living, did he ever join that business in NYC?
+    - hows bfc / mark?
+    - experience: 
+        BFC 
+        - Oct 2014 – Jan 2019 is that okay
+        - some metrics that I can use for resume
+        - GS, yonkofa, zoe report, rochester, atlas, maxx
+        - maxxsonics wasnt selling direct to consumer -> rolled up all brands into magento -> responsible for $X sales
+        - yonkofa -> has since grown to a network of 4 clinics services 10's of k's
+        
+    - ladygang generated 90k of revenue
+    - east alliance
+    - reference
+    
+ 
+
+    

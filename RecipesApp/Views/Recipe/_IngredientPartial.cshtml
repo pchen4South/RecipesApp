@@ -1,0 +1,42 @@
+﻿@model RecipesApp.Models.Ingredient 
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add an ingredient</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="newIngredientForm">
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="text" id="quantity" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Units">Unit of Measurement</label>
+                            <select id="Units">
+                                @foreach(var un in (IEnumerable<UnitOfMeasurement>)ViewBag.Units){ 
+                                    <option value="@un.UnitOfMeasurementId">@un.Abbreviation</option>
+                                }
+                            </select>
+                            <small id="commentsHelp" class="form-text text-muted">Choose a Unit of Measurement / None</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="ingredient">Ingredient Name</label>
+                            <input type="text" id="ingredient" class="form-control" />
+                        </div>
+                        @Html.HiddenFor(x=>x.RecipeId)
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="submitIngredientBtn" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>

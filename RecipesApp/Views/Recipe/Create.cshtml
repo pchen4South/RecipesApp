@@ -1,0 +1,183 @@
+﻿@model RecipesApp.Models.Recipe
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pageContainer">
+    <h3>Let's create a new recipe!</h3>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel" style="margin-top:20px;">
+                @*<div class="panel-heading">New Recipe</div>*@
+                <div class="panel-body">
+                    <form id="newRecipeForm" action="@Url.Action("SubmitRecipe", "API")" enctype="multipart/form-data" method="post">
+                        @Html.HiddenFor(x => x.RecipeId)
+
+                        <div class="form-group">
+                            <label for="title">Recipe Title</label>
+                            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Title" name="title" />
+                            <small id="titleHelp" class="form-text text-muted">Enter a descriptive title for your recipe</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="AuthorComments">Author Comments / Description</label>
+                            <textarea class="form-control" id="AuthorComments" aria-describedby="commentsHelp" placeholder="Author Comments" rows="4" cols="50" name="authorComments"></textarea>
+                            <small id="commentsHelp" class="form-text text-muted">Enter your comments and/or a short description</small>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="recipeImage" class="form-control" name="recipeImage" />
+                            <small id="recipeImage" class="form-text text-muted">Add an image for your recipe</small>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-12">
+                                <button type="button" class="btn-default" id="addIngredientBtn">Add Ingredient</button>
+                                <h3>Ingredients:</h3>
+                                <ul id="ingredientsContainer"></ul>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-12">
+                                <button type="button" class="btn-default" id="addStepBtn">Add Step</button>
+                                <h3>Instructions:</h3>
+                                <ul id="stepsContainer"></ul>
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <button type="submit" class="btn btn-default btn-primary">Submit Recipe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="newIngredientModal"></div>
+<div class="modal" tabindex="-1" id="newStepModal"></div>
+
+@section Scripts{ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SaveNewRecipe = () => {
+                var data = $("#newRecipeForm").serialize();
+            }
+
+            let RecipeId = '@Model.RecipeId';
+            let data = { RecipeId: RecipeId };
+
+            $('#addIngredientBtn').on('click', () => {
+                $("#newIngredientModal").load('@Url.Action("LoadIngredientModal", "Recipe")',data, () => {
+                    $("#newIngredientModal").modal('show');
+                    AttachIngredientClickHandler();
+                });
+            })
+
+            $('#addStepBtn').on('click', () => {
+                $("#newStepModal").load('@Url.Action("LoadStepModal", "Recipe")',data, () => {
+                    $("#newStepModal").modal('show');
+                    AttachStepClickHandler();
+                });
+            })
+
+            PopulateIngredientList = (data) => {
+                $("#ingredientsContainer").append(`<li id='li_ingredient_${data.id}'> <i class="fas fa-trash" id='ingredient_${data.id}'></i> ${data.quantity} ${data.unit} ${data.ingredient}</li>`);
+                $(`#ingredient_${data.id}`).on('click', () => { DeleteIngredient(data.id); });
+            }
+
+            PopulateStepList = (data) => {
+                $("#stepsContainer").append(`<li id='li_step_${data.id}'><i class="fas fa-trash" id='step_${data.id}'></i> ${data.instructions}</li>`);
+                $(`#step_${data.id}`).on('click', () => { DeleteStep(data.id); } );
+            }
+        });
+
+        AttachIngredientClickHandler = () => {
+            $("#submitIngredientBtn").on('click', () =>{
+
+                var data = {
+                    RecipeId: $("#RecipeId").val(),
+                    UnitOfMeasurementId: $("#Units").val(),
+                    Quantity: $("#quantity").val(),
+                    Ingredient: $("#ingredient").val()
+                };
+
+
+                $.ajax({
+                    method: 'post',
+                    url: '@Url.Action("CreateIngredient", "API")',
+                    data: data,
+                    success: (res) => {
+                        if (res.success) {
+                            $("#newIngredientModal").modal('hide');
+                            let newIngredient = {
+                                ingredient: res.ingredient,
+                                quantity: res.quantity,
+                                unit: res.unit,
+                                id: res.newid
+                            };
+
+                            PopulateIngredientList(newIngredient);
+                        }
+                    }
+                });
+            });
+        }
+
+        AttachStepClickHandler = () => {
+            $("#submitStepBtn").on('click', ()=>{
+
+                var data = {
+                    RecipeId: $("#RecipeId").val(),
+                    Instructions: $("#Instructions").val()
+                };
+
+                $.ajax({
+                    method: 'post',
+                    url: '@Url.Action("CreateStep", "API")',
+                    data: data,
+                    success: (res) => {
+                        if (res.success) {
+                            $("#newStepModal").modal('hide');
+                            let newStep = {
+                                instructions: res.instructions,
+                                id: res.newid
+                            };
+
+                            PopulateStepList(newStep);
+                        }
+                    }
+                });
+            });
+        }
+
+        DeleteStep = (id) => {
+            $.ajax({
+                method: 'post',
+                url: '@Url.Action("DeleteStep", "API")',
+                data: {StepId : id},
+                success: (res) => {
+                    if (res.success) {
+                        $(`#li_step_${id}`).remove();
+                    }
+                }
+            });
+        }
+
+        DeleteIngredient = (id) => {
+            $.ajax({
+                method: 'post',
+                url: '@Url.Action("DeleteIngredient", "API")',
+                data: { IngredientId: id },
+                success: (res) => {
+                    if (res.success) {
+                        $(`#li_ingredient_${id}`).remove();
+                    }
+                }
+            });
+        }
+
+    </script>
+}

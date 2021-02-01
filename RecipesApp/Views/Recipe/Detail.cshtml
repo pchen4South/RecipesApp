@@ -1,0 +1,109 @@
+﻿@model RecipesApp.Models.Recipe
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pageContainer">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel" style="margin-top:20px;">
+                <div class="panel-heading" style="margin-bottom:10px;">
+                    <div class="recipeFavContainer">
+                        <span class="favoriteIcon @(Model.isLoggedInUserFavorite ? "fav" : "notfav")" id=@("fav_" + Model.RecipeId.ToString())></span>
+                    </div>
+                    <br />
+                    <h1> @Model.Title</h1>
+                    <span class=""> Uploaded By: @Model.User.FirstName @Model.User.LastName on @Model.CreatedDate.ToShortDateString() </span>
+                    <span style="margin-left:20px;" id="ratingContainer">  Rating: @Model.Rating - @Model.RecipeRatings.Count votes</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="imageContainer" style="margin-left:auto;margin-right:auto;">
+                                <img src="@Url.Content("~/img/" + Model.RecipeImagePath)" class="card-img-top" alt="..." style="max-height:300px;max-width:400px;">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="card-text authorTextDetail">@Model.AuthorComments</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-2">
+                            <h5>Rate This Recipe: </h5>
+                        </div>
+                        <div class="col-md-1">
+                                
+                            <select class="form-control" id="recipeRatingSelect">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn-primary btn-sm" id="rateBtn">Rate</button>
+                        </div>
+                    </div>
+
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-12">
+                                <h3>Ingredients:</h3>
+                                @foreach (var i in Model.Ingredients)
+                                {
+                                    <div class="recipeIngredients">@i.Quantity @i.UnitOfMeasurement.Abbreviation @i.Name</div>
+                                }
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-12">
+                                <h3>Instructions:</h3>
+                                @foreach (var s in Model.Steps)
+                                {
+                                    <div class="recipeSteps">@s.SortOrder. @s.Instructions</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(() =>{
+            $(".recipeFavContainer").on('click', () => {
+                let id = '@Model.RecipeId';
+                let _this = this;
+                $.ajax({
+                    url: "@Url.Action("ToggleRecipeAsFavorite", "api")",
+                    method: 'Post',
+                    data: { RecipeID: id },
+                    success: (res) => {
+                        if (res.toggled == true) {
+                            $(".favoriteIcon").removeClass('notfav').addClass('fav');
+                        } else {
+                            $(".favoriteIcon").removeClass('fav').addClass('notfav');
+                        }
+                    }
+                })
+
+            });
+
+            $("#rateBtn").on('click', () => {
+                let data = { RecipeId: "@Model.RecipeId", Rating: $("#recipeRatingSelect").val() };
+                $.ajax({
+                    url: "@Url.Action("RateRecipe", "api")",
+                    method: 'Post',
+                    data: data,
+                    success: (res) => {
+                        $("#ratingContainer").html(` Rating: ${res.rating} - ${res.votes} votes`);
+                    }
+                })
+            });
+        })
+    </script>
+} 

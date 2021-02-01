@@ -1,0 +1,69 @@
+FIS Global
+Merchant/Banking/Capital markets solutions
+full stack dev
+
+payment solutions, banking experience, securities, assets, insurance, credit
+
+denver
+
+questions -
+interview process
+reloc
+stack
+team size
+innovation team - new prod dev, prototype, inno
+
+FIS - Denver
+- fintech co, in fortune 500
+- B2B products
+- 3 areas - payments, banking, capital markets
+- business innovation team: product org, not specific product line
+- new product prototyping
+- in house incubator
+- this year created -> 1 product into prod
+- ecommerce payment product
+- core inno team, 55ppl+ fast growth
+- 3-4 prototype process (7-14 wk cycles)
+- next year at least 3 hoping 
+
+.net backend / sql / azure 
+react / angular, leaning towards react
+
+innovation group - jan/feb
+founding team 4 ppl from internal -> 55/56+
+rapid growth
+globepay - acquired
+
+55k total employees, company of acquisitions
+ - startup vibe
+ - less structured team
+ - two major groups, 
+	- steve wolchak - innovation - in denver
+	- core innovation group: this pos not in core team
+	- market research, strategy
+	- prototype team: dev 7-14 wk prototypes
+		- prototype team -> new venture team to expand on it
+		- 1-2 yr
+		- other senior level ppl, smaller team
+
+interview process:
+	- get my resume out to the team
+	- 30 min chat w mike, not tech, about experience
+	- assessment (1hr) - hackerrank
+	- 4 diff convos with the team (mix of .net / frontend questions)
+	- early to mid jan
+	- start late jan / early feb
+	
+compensation: 
+ - 110-145k range plus benefits
+ - all salary, ESPP
+ - no RSU, or bonus plan
+ - less impact from covid
+ - mike varians - manager
+
+mary will be in touch
+relocation package -> sign on bonus
+
+
+
+

@@ -1,0 +1,55 @@
+﻿@model List<RecipesApp.Models.Recipe>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    @foreach (var rec in Model)
+    {
+        <div class="col-md-4 recipeCardContainer">
+            <div class="card recipeCard">
+                <img src="@Url.Content("~/img/" + rec.RecipeImagePath)" class="card-img-top" alt="..." style="height:250px;width:100%;">
+                <div class="recipeFavContainer">
+                    <span class="favoriteIcon @(rec.isLoggedInUserFavorite ? "fav" : "notfav")" id=@("fav_" + rec.RecipeId.ToString())></span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@rec.Title</h5>
+                    <span class="smalltext"> Uploaded By: @rec.User.FirstName @rec.User.LastName on @rec.CreatedDate.ToShortDateString() </span>
+                    <br />
+                    <span class="smalltext">  Rating: @rec.Rating - @rec.RecipeRatings.Count votes</span>
+                    <p class="card-text authorText">@rec.AuthorComments</p>
+
+                </div>
+                <a href="@("/recipe/detail/" + rec.RecipeId.ToString())" class="btn detailLink btn-primary">Details</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () { 
+            $(".recipeFavContainer").on('click', function () {
+                let idString = $(this).find(".favoriteIcon").attr('id');
+                let id = idString.split('_')[1];
+                let _this = this;
+
+                $.ajax({
+                    url: "@Url.Action("ToggleRecipeAsFavorite", "api")",
+                    method: 'Post',
+                    data: { RecipeID: id },
+                    success: function (res) {
+                        if (res.toggled == true) {
+                            $(_this).find(".favoriteIcon").removeClass('notfav').addClass('fav');
+                        } else {
+                            console.log("toggle notfav");
+                            $(_this).find(".favoriteIcon").removeClass('fav').addClass('notfav');
+                        }
+                    }
+                })
+
+            });
+        })
+    </script>
+} 
