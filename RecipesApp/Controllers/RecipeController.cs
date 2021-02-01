@@ -19,6 +19,7 @@ namespace RecipesApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Active = "create";
             Recipe recipe = new Recipe()
             {
                 Title = "",
@@ -35,6 +36,7 @@ namespace RecipesApp.Controllers
         [HttpGet]
         public IActionResult MyRecipes()
         {
+            ViewBag.Active = "my";
             //hardcoded for now
             var model = RecipesData.GetUserRecipes(1);
             return View("~/Views/Home/Index.cshtml", model);
@@ -43,6 +45,7 @@ namespace RecipesApp.Controllers
         [HttpGet]
         public IActionResult MyFavorites()
         {
+            ViewBag.Active = "favorites";
             //hardcoded for now
             var model = RecipesData.GetFilteredRecipes((int)Enums.eFilterOptions.MyFavorite);
             return View("~/Views/Home/Index.cshtml", model);
@@ -52,6 +55,7 @@ namespace RecipesApp.Controllers
         [Route("/")]
         public IActionResult Index()
         {
+            ViewBag.Active = "all";
             var model = RecipesData.GetAllRecipes();
 
             // run method on the model to see if they are favorites of the logged in user
